@@ -1,8 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-let players = [
-  {
+let players = [{
     id: 0,
     name: "Kyrie Irving",
     team: "Boston Celtics",
@@ -58,7 +57,7 @@ router.get("/", (req, res) => {
 })
 
 //display single player
-router.get("/:id", (req,res) => {
+router.get("/:id", (req, res) => {
   res.send({
     message: `get single player`,
     player: getItemById(players, req.params.id)
@@ -79,18 +78,21 @@ router.post("/", (req, res) => {
 })
 
 // delete players
-router.delete("/", (req,res) => {
+router.delete("/", (req, res) => {
   players.splice(0, players.length)
   res.send(players)
 })
 
 // delete single player
 router.delete("/:id", (req, res) => {
-    const currentPlayers = players.filter(player =>{
-      return player.id !== Number(req.params.id)
-    })
-    players = currentPlayers
-    res.send({message: `player deleted`, currentPlayers: players})
+  const currentPlayers = players.filter(player => {
+    return player.id !== Number(req.params.id)
+  })
+  players = currentPlayers
+  res.send({
+    message: `player deleted`,
+    currentPlayers: players
+  })
 })
 
 //Update player
